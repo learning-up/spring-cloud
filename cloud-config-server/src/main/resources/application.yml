@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: cloud-config-server
+  cloud:
+    config:
+      server:
+            git:
+              uri: https://github.com/learning-up/spring-cloud.git
+              searchPaths: cloud-config-repo
+server:
+  port: 8082
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone:  http://localhost:8761/eureka/
