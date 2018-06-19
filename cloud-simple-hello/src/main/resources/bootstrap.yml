@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    config:
+      name: data-source
+      profile: dev
+      uri: http://localhost:8082/
+#      label: master
