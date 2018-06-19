@@ -11,13 +11,16 @@
         <module name="cloud-simple-hello" />
         <module name="cloud-simple-server" />
         <module name="cloud-simple-server (1)" />
+        <module name="cloud-zuul-config" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="cloud-config-server" target="1.8" />
+      <module name="cloud-config-zuul" target="1.7" />
       <module name="cloud-eureka-server" target="1.8" />
       <module name="cloud-simple-hello" target="1.8" />
       <module name="cloud-simple-server" target="1.8" />
+      <module name="cloud-zuul-config" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

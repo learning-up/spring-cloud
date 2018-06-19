@@ -1,4 +1,4 @@
-package cloud.eureka.server;
+package cloud.zuul.config;
 
 import static org.junit.Assert.assertTrue;
 

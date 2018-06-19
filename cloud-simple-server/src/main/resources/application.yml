@@ -3,4 +3,4 @@ server:
 
 spring:
   application:
-    name: cloud-simple-service
+    name: service1

@@ -6,7 +6,7 @@ spring:
       label: master
       discovery:
         enabled: true
-        serviceId: cloud-config-server
+        serviceId: config-server
 
 eureka:
   client:
