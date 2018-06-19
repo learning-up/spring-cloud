@@ -4,4 +4,4 @@ spring:
       name: data-source
       profile: dev
       uri: http://localhost:8082/
-#      label: master
+      label: master

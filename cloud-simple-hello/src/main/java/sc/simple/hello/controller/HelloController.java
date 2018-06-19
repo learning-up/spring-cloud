@@ -6,17 +6,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RefreshScope
+//@RefreshScope
 @RestController
 @RequestMapping("hello")
 public class HelloController {
 
-    @Value("${mysqldb.datasource.url}")
+    @Value("${hello}")
     private String username;
 
     public void setUsername(String name){
         this.username = name;
     }
+
 
     @GetMapping("get")
     public String get(){
