@@ -3,5 +3,12 @@ spring:
     config:
       name: data-source
       profile: dev
-      uri: http://localhost:8082/
       label: master
+      discovery:
+        enabled: true
+        serviceId: cloud-config-server
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8083/eureka/
