@@ -19,8 +19,9 @@
   <parent>
     <groupId>org.springframework.cloud</groupId>
     <artifactId>spring-cloud-starter-parent</artifactId>
-    <version>Brixton.RELEASE</version>
+    <version>Edgware.SR3</version>
   </parent>
+
 
   <dependencies>
 

@@ -1,5 +1,14 @@
 server:
   port: 8081
+
 spring:
   application:
     name: cloud-simple-hello
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8083/eureka/
+    instance:
+          lease-expiration-duration-in-seconds: 30
+          lease-renewal-interval-in-seconds: 10

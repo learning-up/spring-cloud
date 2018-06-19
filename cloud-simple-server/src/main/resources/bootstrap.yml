@@ -1,0 +1,19 @@
+spring:
+  cloud:
+    config:
+      name: data-source
+      profile: dev
+      label: master
+      discovery:
+        enabled: true
+        serviceId: cloud-config-server
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8083/eureka/
+    instance:
+          lease-expiration-duration-in-seconds: 30
+          lease-renewal-interval-in-seconds: 10
+#    healthcheck:
+    #        enabled: true
