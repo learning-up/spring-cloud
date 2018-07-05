@@ -4,6 +4,3 @@ server:
 spring:
   application:
     name: service1
-
-hello:
-  aaa
