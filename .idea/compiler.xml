@@ -12,6 +12,7 @@
         <module name="cloud-simple-server" />
         <module name="cloud-simple-server (1)" />
         <module name="cloud-zuul-config" />
+        <module name="jenkins" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -21,6 +22,7 @@
       <module name="cloud-simple-hello" target="1.8" />
       <module name="cloud-simple-server" target="1.8" />
       <module name="cloud-zuul-config" target="1.8" />
+      <module name="jenkins" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
