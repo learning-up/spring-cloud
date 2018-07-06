@@ -24,7 +24,7 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://192.168.0.212:8883/eureka/
-    instance:
-          lease-expiration-duration-in-seconds: 30
-          lease-renewal-interval-in-seconds: 10
+  instance:
+        lease-expiration-duration-in-seconds: 30
+        lease-renewal-interval-in-seconds: 10
 

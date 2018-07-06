@@ -4,3 +4,15 @@ server:
 spring:
   application:
     name: service1
+hello: 111
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.0.212:8883/eureka/
+  instance:
+    prefer-ip-address: true #以IP地址注册到服务中心
+    instance-id: 192.168.10.194:${spring.application.name}:${server.port}
+    lease-expiration-duration-in-seconds: 30
+    lease-renewal-interval-in-seconds: 10
+#    healthcheck:
+    #        enabled: true
