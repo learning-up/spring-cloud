@@ -1,10 +1,29 @@
+server:
+  port: 8885
+
 spring:
-  cloud:
-    config:
-      name: data-source
-      profile: dev
-      label: master
-      discovery:
-        enabled: true
-        serviceId: config-server
+  application:
+    name: service1
+#  cloud:
+#    config:
+#      name: data-source
+#      profile: dev
+#      label: master
+#      discovery:
+#        enabled: true
+#        serviceId: config-server
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://admin:admin@192.168.10.194:8883/eureka/
+  instance:
+    prefer-ip-address: true #以IP地址注册到服务中心
+    ip-address: 192.168.10.194
+    instance-id: ${eureka.instance.ip-address}:${spring.application.name}:${server.port}
+    lease-expiration-duration-in-seconds: 30
+    lease-renewal-interval-in-seconds: 10
+#    healthcheck:
+    #        enabled: true
+
 

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("hello")
 public class HelloController {
 
-    @Value("${hello}")
+    @Value("${hello:aaa}")
     private String username;
 
     public void setUsername(String name){
