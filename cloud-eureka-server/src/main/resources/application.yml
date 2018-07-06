@@ -6,8 +6,8 @@ eureka:
       enable-self-preservation: false
       eviction-interval-timer-in-ms: 30000
   instance:
-    hostname:
-      localhost
+    hostname: localhost
+    prefer-ip-address: true
   client:
     registerWithEureka: false
     fetchRegistry:  false
