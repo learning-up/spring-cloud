@@ -1,9 +1,9 @@
 server:
-  port: 8885
+  port: 8887
 
 spring:
   application:
-    name: service1
+    name: auth
   cloud:
     config:
       name: data-source

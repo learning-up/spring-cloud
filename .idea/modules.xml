@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/cloud-auth-server/cloud-auth-server.iml" filepath="$PROJECT_DIR$/cloud-auth-server/cloud-auth-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/cloud-config-server/cloud-config-server.iml" filepath="$PROJECT_DIR$/cloud-config-server/cloud-config-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/cloud-eureka-server/cloud-eureka-server.iml" filepath="$PROJECT_DIR$/cloud-eureka-server/cloud-eureka-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/cloud-simple-hello/cloud-simple-hello.iml" filepath="$PROJECT_DIR$/cloud-simple-hello/cloud-simple-hello.iml" />
       <module fileurl="file://$PROJECT_DIR$/cloud-simple-server/cloud-simple-server.iml" filepath="$PROJECT_DIR$/cloud-simple-server/cloud-simple-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/cloud-zuul-config/cloud-zuul-config.iml" filepath="$PROJECT_DIR$/cloud-zuul-config/cloud-zuul-config.iml" />
-      <module fileurl="file://$PROJECT_DIR$/jenkins/jenkins.iml" filepath="$PROJECT_DIR$/jenkins/jenkins.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/spring-cloud.iml" filepath="$PROJECT_DIR$/.idea/spring-cloud.iml" />
     </modules>
   </component>

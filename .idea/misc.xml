@@ -13,7 +13,7 @@
         <option value="$PROJECT_DIR$/cloud-eureka-server/pom.xml" />
         <option value="$PROJECT_DIR$/cloud-config-zuul/pom.xml" />
         <option value="$PROJECT_DIR$/cloud-zuul-config/pom.xml" />
-        <option value="$PROJECT_DIR$/jenkins/pom.xml" />
+        <option value="$PROJECT_DIR$/cloud-auth-server/pom.xml" />
       </list>
     </option>
   </component>
