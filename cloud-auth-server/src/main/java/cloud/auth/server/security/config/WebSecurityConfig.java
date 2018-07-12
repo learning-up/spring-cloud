@@ -8,6 +8,7 @@ import cloud.auth.server.security.auth.token.SkipPathRequestMatcher;
 import cloud.auth.server.security.auth.token.TokenAuthenticationProcessingFilter;
 import cloud.auth.server.security.auth.token.TokenAuthenticationProvider;
 import cloud.auth.server.security.auth.token.extractor.TokenExtractor;
+import cloud.auth.server.security.common.Constants;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -29,12 +30,6 @@ import java.util.List;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    public static final String TOKEN_HEADER_PARAM = "X-Authorization";
-    private static final String FORM_BASED_LOGIN_ENTRY_POINT = "/api/auth/login";
-    private static final String TOKEN_BASED_AUTH_ENTRY_POINT = "/api/**";
-    private static final String MANAGE_TOKEN_BASED_AUTH_ENTRY_POINT = "/manage/**";
-    private static final String TOKEN_REFRESH_ENTRY_POINT = "/api/auth/refresh_token";
-
     @Autowired private AuthenticationEntryPoint authenticationEntryPoint;
     @Autowired private AuthenticationSuccessHandler successHandler;
     @Autowired private AuthenticationFailureHandler failureHandler;
@@ -43,13 +38,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired private TokenExtractor tokenExtractor;
 
     private LoginProcessingFilter buildLoginProcessingFilter() throws Exception {
-        LoginProcessingFilter filter = new LoginProcessingFilter(FORM_BASED_LOGIN_ENTRY_POINT, successHandler, failureHandler);
+        LoginProcessingFilter filter = new LoginProcessingFilter(Constants.FORM_BASED_LOGIN_ENTRY_POINT, successHandler, failureHandler);
         filter.setAuthenticationManager(super.authenticationManager());
         return filter;
     }
 
     private TokenAuthenticationProcessingFilter buildTokenAuthenticationProcessingFilter() throws Exception {
-        List<String> list = Lists.newArrayList(TOKEN_BASED_AUTH_ENTRY_POINT, MANAGE_TOKEN_BASED_AUTH_ENTRY_POINT);
+        List<String> list = Lists.newArrayList(Constants.TOKEN_BASED_AUTH_ENTRY_POINT, Constants.MANAGE_TOKEN_BASED_AUTH_ENTRY_POINT);
         SkipPathRequestMatcher matcher = new SkipPathRequestMatcher(list);
         TokenAuthenticationProcessingFilter filter = new TokenAuthenticationProcessingFilter(failureHandler, tokenExtractor, matcher);
         filter.setAuthenticationManager(super.authenticationManager());
@@ -79,12 +74,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(FORM_BASED_LOGIN_ENTRY_POINT).permitAll() // Login end-point
-                .antMatchers(TOKEN_REFRESH_ENTRY_POINT).permitAll() // Token refresh end-point
+                .antMatchers(Constants.FORM_BASED_LOGIN_ENTRY_POINT).permitAll() // Login end-point
+                .antMatchers(Constants.TOKEN_REFRESH_ENTRY_POINT).permitAll() // Token refresh end-point
                 .and()
                 .authorizeRequests()
-                .antMatchers(TOKEN_BASED_AUTH_ENTRY_POINT).authenticated() // Protected API End-points
-                .antMatchers(MANAGE_TOKEN_BASED_AUTH_ENTRY_POINT).hasAnyRole(RoleEnum.ADMIN.desc())
+                .antMatchers(Constants.TOKEN_BASED_AUTH_ENTRY_POINT).authenticated() // Protected API End-points
+                .antMatchers(Constants.MANAGE_TOKEN_BASED_AUTH_ENTRY_POINT).hasAnyRole(RoleEnum.ADMIN.desc())
                 .and()
                 .addFilterBefore(buildLoginProcessingFilter(), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(buildTokenAuthenticationProcessingFilter(), UsernamePasswordAuthenticationFilter.class);
