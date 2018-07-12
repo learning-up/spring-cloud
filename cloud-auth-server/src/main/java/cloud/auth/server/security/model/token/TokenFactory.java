@@ -53,8 +53,8 @@ public class TokenFactory {
         }
 
         Claims claims = Jwts.claims().setSubject(userContext.getUsername());
-        claims.put(Constants.SCOPES, userContext.getAuthorities().stream().map(Object::toString).collect(toList()));
-//        claims.put(Constants.SCOPES, Collections.singletonList(Scopes.REFRESH_TOKEN.authority()));
+//        claims.put(Constants.SCOPES, userContext.getAuthorities().stream().map(Object::toString).collect(toList()));
+        claims.put(Constants.SCOPES, Collections.singletonList(Scopes.REFRESH_TOKEN.authority()));
         String token = TokenUtil.createToken(claims, properties, true);
 
         return new AccessToken(token, claims);
