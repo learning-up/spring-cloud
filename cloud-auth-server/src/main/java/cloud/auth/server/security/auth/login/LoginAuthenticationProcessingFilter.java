@@ -1,10 +1,8 @@
 package cloud.auth.server.security.auth.login;
 
-import cloud.auth.server.security.exceptions.AuthMethodNotSupportedException;
+import cloud.auth.server.security.exceptions.type.AuthMethodNotSupportedException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,16 +21,17 @@ import java.io.IOException;
 
 
 /**
- * 登录处理过滤器
+ * 提供一般常用的Ajax 身份验证请求
+ * 在成功验证JSON的主要检验逻辑是委托给AuthenticationProvider类实现
  */
 @Slf4j
-public class LoginProcessingFilter extends AbstractAuthenticationProcessingFilter {
+public class LoginAuthenticationProcessingFilter extends AbstractAuthenticationProcessingFilter {
 
     private final AuthenticationSuccessHandler successHandler;
     private final AuthenticationFailureHandler failureHandler;
 
-    public LoginProcessingFilter(String defaultProcessUrl, AuthenticationSuccessHandler successHandler,
-                                 AuthenticationFailureHandler failureHandler) {
+    public LoginAuthenticationProcessingFilter(String defaultProcessUrl, AuthenticationSuccessHandler successHandler,
+                                               AuthenticationFailureHandler failureHandler) {
         super(defaultProcessUrl);
         this.successHandler = successHandler;
         this.failureHandler = failureHandler;

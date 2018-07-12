@@ -3,12 +3,10 @@ package cloud.auth.server.security.auth.token;
 import cloud.auth.server.security.auth.AuthenticationToken;
 import cloud.auth.server.security.config.TokenProperties;
 import cloud.auth.server.security.model.UserContext;
-import cloud.auth.server.security.model.token.RawAccessToken;
+import cloud.auth.server.security.model.token.AccessToken;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
@@ -21,7 +19,7 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 /**
- * 使用 {@link AuthenticationProvider} 的接口提供实现 {@link Token} 身份验证的实例
+ * 提供实现身份验证的实例
  */
 @Component
 @Slf4j
@@ -31,7 +29,7 @@ public class TokenAuthenticationProvider implements AuthenticationProvider {
 
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		RawAccessToken rawAccessToken = (RawAccessToken) authentication.getCredentials();
+		AccessToken rawAccessToken = (AccessToken) authentication.getCredentials();
 		long startTime = System.currentTimeMillis();
 		Jws<Claims> jwsClaims = rawAccessToken.parseClaims(tokenProperties.getSigningKey());
 		log.debug("[验证Token消耗时间] - [{}]", (System.currentTimeMillis() - startTime));

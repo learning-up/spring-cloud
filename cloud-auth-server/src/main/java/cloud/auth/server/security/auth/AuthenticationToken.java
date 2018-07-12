@@ -1,7 +1,7 @@
 package cloud.auth.server.security.auth;
 
 import cloud.auth.server.security.model.UserContext;
-import cloud.auth.server.security.model.token.RawAccessToken;
+import cloud.auth.server.security.model.token.AccessToken;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -14,10 +14,10 @@ public class AuthenticationToken extends AbstractAuthenticationToken {
 
     private static final long serialVersionUID = 2877954820905567501L;
 
-    private RawAccessToken rawAccessToken;
+    private AccessToken rawAccessToken;
     private UserContext userContext;
 
-    public AuthenticationToken(RawAccessToken unsafeToken) {
+    public AuthenticationToken(AccessToken unsafeToken) {
         super(null);
         this.rawAccessToken = unsafeToken;
         this.setAuthenticated(false);

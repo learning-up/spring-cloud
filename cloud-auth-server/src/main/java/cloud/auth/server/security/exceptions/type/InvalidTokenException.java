@@ -1,4 +1,4 @@
-package cloud.auth.server.security.exceptions;
+package cloud.auth.server.security.exceptions.type;
 
 /**
  * 无效的Token

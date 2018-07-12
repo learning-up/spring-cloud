@@ -1,4 +1,4 @@
-package cloud.auth.server.security.auth;
+package cloud.auth.server.security.auth.login;
 
 import cloud.auth.server.security.model.UserContext;
 import cloud.auth.server.service.UserInfoService;
@@ -20,13 +20,19 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+/**
+ * 1. 对用户凭证与 数据库、LDAP或其他系统用户数据，进行验证。
+ * 2. 如果用户名和密码不匹配数据库中的记录，身份验证异常将会被抛出。
+ * 3. 创建用户上下文，你需要一些你需要的用户数据来填充（例如 用户名 和用户密码）
+ * 4. 在成功验证委托创建JWT令牌的是在* AuthenticationSuccessHandler* 中实现。
+ */
 @Component
 @Slf4j
 public class LoginAuthenticationProvider implements AuthenticationProvider {
@@ -34,6 +40,7 @@ public class LoginAuthenticationProvider implements AuthenticationProvider {
 	@Autowired private UserInfoService userService;
     @Autowired private UserRoleService roleService;
 
+    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -47,6 +54,9 @@ public class LoginAuthenticationProvider implements AuthenticationProvider {
 
         if(user == null) throw new UsernameNotFoundException("User not found: " + username);
 
+//        if (!encoder.matches(password,user.getPassword())) {
+//            throw new BadCredentialsException("Authentication Failed. Username or Password not valid.");
+//        }
         if (!StringUtils.equals(password, user.getPassword())) {
             throw new BadCredentialsException("Authentication Failed. Username or Password not valid.");
         }

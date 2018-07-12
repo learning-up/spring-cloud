@@ -1,4 +1,4 @@
-package cloud.auth.server.security.common;
+package cloud.auth.server.security.exceptions;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

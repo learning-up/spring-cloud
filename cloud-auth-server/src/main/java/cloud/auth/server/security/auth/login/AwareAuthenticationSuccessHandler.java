@@ -58,10 +58,7 @@ public class AwareAuthenticationSuccessHandler implements AuthenticationSuccessH
     protected final void clearAuthenticationAttributes(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
 
-        if (session == null) {
-            return;
-        }
-
-        session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+        if (session != null)
+            session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
     }
 }

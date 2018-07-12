@@ -1,9 +1,9 @@
 package cloud.auth.server.security.auth.login;
 
-import cloud.auth.server.security.common.ErrorCode;
-import cloud.auth.server.security.common.ErrorResponse;
-import cloud.auth.server.security.exceptions.AuthMethodNotSupportedException;
-import cloud.auth.server.security.exceptions.ExpiredTokenException;
+import cloud.auth.server.security.exceptions.ErrorCode;
+import cloud.auth.server.security.exceptions.ErrorResponse;
+import cloud.auth.server.security.exceptions.type.AuthMethodNotSupportedException;
+import cloud.auth.server.security.exceptions.type.ExpiredTokenException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

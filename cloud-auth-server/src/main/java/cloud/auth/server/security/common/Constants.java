@@ -14,4 +14,6 @@ public interface Constants {
     String MANAGE_TOKEN_BASED_AUTH_ENTRY_POINT = "/manage/**";
     String TOKEN_REFRESH_ENTRY_POINT = "/api/auth/refresh_token";
 
+    String SCOPES = "scopes";
+
 }

@@ -1,4 +1,4 @@
-package cloud.auth.server.security.exceptions;
+package cloud.auth.server.security.exceptions.type;
 
 import org.springframework.security.authentication.AuthenticationServiceException;
 

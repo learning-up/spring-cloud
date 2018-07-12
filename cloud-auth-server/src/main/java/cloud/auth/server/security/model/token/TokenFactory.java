@@ -1,5 +1,6 @@
 package cloud.auth.server.security.model.token;
 
+import cloud.auth.server.security.common.Constants;
 import cloud.auth.server.security.config.TokenProperties;
 import cloud.auth.server.security.model.Scopes;
 import cloud.auth.server.security.model.UserContext;
@@ -35,17 +36,8 @@ public class TokenFactory {
         Optional.ofNullable(context.getUsername()).orElseThrow(() -> new IllegalArgumentException("Cannot create Token without username"));
         Optional.ofNullable(context.getAuthorities()).orElseThrow(() -> new IllegalArgumentException("User doesn't have any privileges"));
         Claims claims = Jwts.claims().setSubject(context.getUsername());
-        claims.put("scopes", context.getAuthorities().stream().map(Object::toString).collect(toList()));
-        LocalDateTime currentTime = LocalDateTime.now();
-        String token = Jwts.builder()
-                .setClaims(claims)
-                .setIssuer(properties.getIssuer())
-                .setIssuedAt(Date.from(currentTime.atZone(ZoneId.systemDefault()).toInstant()))
-                .setExpiration(Date.from(currentTime
-                        .plusMinutes(properties.getExpirationTime())
-                        .atZone(ZoneId.systemDefault()).toInstant()))
-                .signWith(SignatureAlgorithm.HS512, properties.getSigningKey())
-                .compact();
+        claims.put(Constants.SCOPES, context.getAuthorities().stream().map(Object::toString).collect(toList()));
+        String token = TokenUtil.createToken(claims, properties, false);
         return new AccessToken(token, claims);
     }
 
@@ -59,19 +51,11 @@ public class TokenFactory {
         if (StringUtils.isBlank(userContext.getUsername())) {
             throw new IllegalArgumentException("Cannot create Token without username");
         }
-        LocalDateTime currentTime = LocalDateTime.now();
+
         Claims claims = Jwts.claims().setSubject(userContext.getUsername());
-        claims.put("scopes", Collections.singletonList(Scopes.REFRESH_TOKEN.authority()));
-        String token = Jwts.builder()
-                .setClaims(claims)
-                .setIssuer(properties.getIssuer())
-                .setId(UUID.randomUUID().toString())
-                .setIssuedAt(Date.from(currentTime.atZone(ZoneId.systemDefault()).toInstant()))
-                .setExpiration(Date.from(currentTime
-                        .plusMinutes(properties.getRefreshExpTime())
-                        .atZone(ZoneId.systemDefault()).toInstant()))
-                .signWith(SignatureAlgorithm.HS512, properties.getSigningKey())
-                .compact();
+        claims.put(Constants.SCOPES, userContext.getAuthorities().stream().map(Object::toString).collect(toList()));
+//        claims.put(Constants.SCOPES, Collections.singletonList(Scopes.REFRESH_TOKEN.authority()));
+        String token = TokenUtil.createToken(claims, properties, true);
 
         return new AccessToken(token, claims);
     }

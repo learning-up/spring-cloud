@@ -2,8 +2,8 @@ package cloud.auth.server.security.auth.token;
 
 import cloud.auth.server.security.auth.AuthenticationToken;
 import cloud.auth.server.security.auth.token.extractor.TokenExtractor;
-import cloud.auth.server.security.config.WebSecurityConfig;
-import cloud.auth.server.security.model.token.RawAccessToken;
+import cloud.auth.server.security.common.Constants;
+import cloud.auth.server.security.model.token.AccessToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -22,7 +22,8 @@ import java.io.IOException;
 
 
 /**
- * 执行Token的验证
+ * 检查访问令牌在X-Authorization头
+ * 调用执行Token的验证
  */
 public class TokenAuthenticationProcessingFilter extends AbstractAuthenticationProcessingFilter {
 
@@ -40,8 +41,8 @@ public class TokenAuthenticationProcessingFilter extends AbstractAuthenticationP
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException, IOException, ServletException {
-        String tokenPayload = request.getHeader(WebSecurityConfig.TOKEN_HEADER_PARAM);
-        RawAccessToken token = new RawAccessToken(tokenExtractor.extract(tokenPayload));
+        String tokenPayload = request.getHeader(Constants.TOKEN_HEADER_PARAM);
+        AccessToken token = new AccessToken(tokenExtractor.extract(tokenPayload));
         return getAuthenticationManager().authenticate(new AuthenticationToken(token));
     }
 

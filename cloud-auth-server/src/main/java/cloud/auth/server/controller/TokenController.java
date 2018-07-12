@@ -4,11 +4,11 @@ import cloud.auth.server.model.UserInfo;
 import cloud.auth.server.model.UserRole;
 import cloud.auth.server.security.auth.token.extractor.TokenExtractor;
 import cloud.auth.server.security.auth.token.verifier.TokenVerifier;
+import cloud.auth.server.security.common.Constants;
 import cloud.auth.server.security.config.TokenProperties;
-import cloud.auth.server.security.config.WebSecurityConfig;
-import cloud.auth.server.security.exceptions.InvalidTokenException;
+import cloud.auth.server.security.exceptions.type.InvalidTokenException;
 import cloud.auth.server.security.model.UserContext;
-import cloud.auth.server.security.model.token.RawAccessToken;
+import cloud.auth.server.security.model.token.AccessToken;
 import cloud.auth.server.security.model.token.RefreshToken;
 import cloud.auth.server.security.model.token.Token;
 import cloud.auth.server.security.model.token.TokenFactory;
@@ -38,10 +38,11 @@ public class TokenController {
     @Autowired private UserRoleService userRoleService;
 
     @GetMapping("/api/auth/refresh_token")
-    public Token refreshToken(HttpServletRequest request) {
-        String tokenPayload = tokenExtractor.extract(request.getHeader(WebSecurityConfig.TOKEN_HEADER_PARAM));
-        RawAccessToken rawToken = new RawAccessToken(tokenPayload);
-        RefreshToken refreshToken = RefreshToken.create(rawToken, tokenProperties.getSigningKey()).orElseThrow(() -> new InvalidTokenException("Token验证失败"));
+    public AccessToken refreshToken(HttpServletRequest request) {
+        String tokenPayload = tokenExtractor.extract(request.getHeader(Constants.TOKEN_HEADER_PARAM));
+        AccessToken rawToken = new AccessToken(tokenPayload);
+        RefreshToken refreshToken = RefreshToken.create(rawToken, tokenProperties.getSigningKey())
+                .orElseThrow(() -> new InvalidTokenException("Token验证失败"));
 
         String jti = refreshToken.getJti();
         if (!tokenVerifier.verify(jti)) {

@@ -1,8 +1,12 @@
 package cloud.auth.server.security.model.token;
 
+import cloud.auth.server.security.common.Constants;
 import cloud.auth.server.security.model.Scopes;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.security.authentication.BadCredentialsException;
 
 import java.util.List;
@@ -11,12 +15,10 @@ import java.util.Optional;
 /**
  * Token刷新工具类
  */
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class RefreshToken implements Token {
-    private Jws<Claims> claims;
 
-    private RefreshToken(Jws<Claims> claims) {
-        this.claims = claims;
-    }
+    @Getter private Jws<Claims> claims;
 
     /**
      * Creates and validates Refresh token
@@ -26,10 +28,10 @@ public class RefreshToken implements Token {
      * @return
      * @throws BadCredentialsException
      */
-    public static Optional<RefreshToken> create(RawAccessToken token, String signingKey) {
+    public static Optional<RefreshToken> create(AccessToken token, String signingKey) {
         Jws<Claims> claims = token.parseClaims(signingKey);
         @SuppressWarnings("unchecked")
-        List<String> scopes = claims.getBody().get("scopes", List.class);
+        List<String> scopes = claims.getBody().get(Constants.SCOPES, List.class);
         if (scopes == null || scopes.isEmpty()
                 || scopes.stream().noneMatch(scope -> Scopes.REFRESH_TOKEN.authority().equals(scope))
                 ) {
@@ -43,15 +45,11 @@ public class RefreshToken implements Token {
         return null;
     }
 
-    public Jws<Claims> getClaims() {
-        return claims;
-    }
-
     public String getJti() {
-        return claims.getBody().getId();
+        return this.claims.getBody().getId();
     }
 
     public String getSubject() {
-        return claims.getBody().getSubject();
+        return this.claims.getBody().getSubject();
     }
 }
