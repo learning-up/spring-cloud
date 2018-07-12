@@ -16,7 +16,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="cloud-auth-server" target="1.6" />
+      <module name="cloud-auth-server" target="8" />
       <module name="cloud-config-server" target="1.8" />
       <module name="cloud-config-zuul" target="1.7" />
       <module name="cloud-eureka-server" target="1.8" />

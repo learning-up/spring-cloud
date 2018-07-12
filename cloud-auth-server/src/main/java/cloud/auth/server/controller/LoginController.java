@@ -1,6 +1,6 @@
 package cloud.auth.server.controller;
 
-import cloud.auth.server.model.User;
+import cloud.auth.server.model.UserInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class LoginController {
 
     @GetMapping("/login")
-    public String login(Model model, User user){
+    public String login(Model model, UserInfo user){
         model.addAttribute("user",user);
         return "login";
     }
