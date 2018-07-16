@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-
 /**
  * 检查访问令牌在X-Authorization头
  * 调用执行Token的验证
@@ -41,6 +40,7 @@ public class TokenAuthenticationProcessingFilter extends AbstractAuthenticationP
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException, IOException, ServletException {
+//        Cookie cookie = Arrays.stream(request.getCookies()).filter(t -> t.getName().equals("X-COOKIE")).findFirst().get();
         String tokenPayload = request.getHeader(Constants.TOKEN_HEADER_PARAM);
         AccessToken token = new AccessToken(tokenExtractor.extract(tokenPayload));
         return getAuthenticationManager().authenticate(new AuthenticationToken(token));

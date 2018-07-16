@@ -10,10 +10,10 @@ import cloud.auth.server.security.exceptions.type.InvalidTokenException;
 import cloud.auth.server.security.model.UserContext;
 import cloud.auth.server.security.model.token.AccessToken;
 import cloud.auth.server.security.model.token.RefreshToken;
-import cloud.auth.server.security.model.token.Token;
 import cloud.auth.server.security.model.token.TokenFactory;
 import cloud.auth.server.service.UserInfoService;
 import cloud.auth.server.service.UserRoleService;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
@@ -38,7 +38,7 @@ public class TokenController {
     @Autowired private UserRoleService userRoleService;
 
     @GetMapping("/api/auth/refresh_token")
-    public AccessToken refreshToken(HttpServletRequest request) {
+    public JSONObject refreshToken(HttpServletRequest request) {
         String tokenPayload = tokenExtractor.extract(request.getHeader(Constants.TOKEN_HEADER_PARAM));
         AccessToken rawToken = new AccessToken(tokenPayload);
         RefreshToken refreshToken = RefreshToken.create(rawToken, tokenProperties.getSigningKey())
@@ -57,7 +57,7 @@ public class TokenController {
                 .collect(Collectors.toList());
 
         UserContext userContext = UserContext.create(user.getUsername(), authorities);
-        return tokenFactory.createAccessToken(userContext);
+        return tokenFactory.tokenWrapper(userContext);
     }
 
 }

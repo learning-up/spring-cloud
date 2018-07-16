@@ -22,16 +22,17 @@ public class SkipPathRequestMatcher implements RequestMatcher {
     private RequestMatcher processingMatcher;
 
     public SkipPathRequestMatcher(String processingPath, List<String> pathsToSkip) {
-        Assert.notNull(pathsToSkip, "路径不能为空");
-        List<RequestMatcher> m = pathsToSkip.stream().map(path -> new AntPathRequestMatcher(path)).collect(Collectors.toList());
-        matchers = new OrRequestMatcher(m);
-        processingMatcher = new AntPathRequestMatcher(processingPath);
+        initField(processingPath, pathsToSkip);
     }
 
     public SkipPathRequestMatcher(String processingPath, String... pathsToSkip) {
-        Assert.notNull(pathsToSkip, "路径不能为空");
         List<String> list = Lists.newArrayList(pathsToSkip);
-        List<RequestMatcher> m = list.stream().map(path -> new AntPathRequestMatcher(path)).collect(Collectors.toList());
+        initField(processingPath, list);
+    }
+
+    private void initField(String processingPath, List<String> pathsToSkip) {
+        Assert.notNull(pathsToSkip, "路径不能为空");
+        List<RequestMatcher> m = pathsToSkip.stream().map(path -> new AntPathRequestMatcher(path)).collect(Collectors.toList());
         matchers = new OrRequestMatcher(m);
         processingMatcher = new AntPathRequestMatcher(processingPath);
     }

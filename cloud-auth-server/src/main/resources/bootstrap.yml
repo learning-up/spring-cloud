@@ -12,6 +12,8 @@ spring:
       discovery:
         enabled: true
         serviceId: config-server
+  thymeleaf:
+    cache: false
 
 eureka:
   client:

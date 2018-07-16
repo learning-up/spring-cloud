@@ -4,15 +4,13 @@ import cloud.auth.server.security.common.Constants;
 import cloud.auth.server.security.config.TokenProperties;
 import cloud.auth.server.security.model.Scopes;
 import cloud.auth.server.security.model.UserContext;
+import com.alibaba.fastjson.JSONObject;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.*;
 
 import static java.util.stream.Collectors.toList;
@@ -58,5 +56,16 @@ public class TokenFactory {
         String token = TokenUtil.createToken(claims, properties, true);
 
         return new AccessToken(token, claims);
+    }
+
+    public JSONObject tokenWrapper(UserContext userContext){
+        AccessToken accessToken = this.createAccessToken(userContext);
+        Token refreshToken = this.createRefreshToken(userContext);
+
+        JSONObject tokenMap = new JSONObject();
+        tokenMap.put("claims", accessToken.getClaims());
+        tokenMap.put("token", accessToken.getToken());
+        tokenMap.put("refreshToken", refreshToken.getToken());
+        return tokenMap;
     }
 }

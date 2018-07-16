@@ -22,7 +22,7 @@ import java.io.IOException;
 
 /**
  * 提供一般常用的Ajax 身份验证请求
- * 在成功验证JSON的主要检验逻辑是委托给AuthenticationProvider类实现
+ * 成功验证JSON的主要检验逻辑是委托给AuthenticationProvider类实现
  */
 @Slf4j
 public class LoginAuthenticationProcessingFilter extends AbstractAuthenticationProcessingFilter {

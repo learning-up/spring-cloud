@@ -9,10 +9,10 @@ public interface Constants {
     String CONTENT_TYPE = "Content-type";
     String CONTENT_TYPE_JSON = "application/json";
 
-    String FORM_BASED_LOGIN_ENTRY_POINT = "/api/auth/login";
+    String FORM_BASED_LOGIN_ENTRY_POINT = "/api/login";
     String TOKEN_BASED_AUTH_ENTRY_POINT = "/api/**";
     String MANAGE_TOKEN_BASED_AUTH_ENTRY_POINT = "/manage/**";
-    String TOKEN_REFRESH_ENTRY_POINT = "/api/auth/refresh_token";
+    String TOKEN_REFRESH_ENTRY_POINT = "/api/refresh_token";
 
     String SCOPES = "scopes";
 
