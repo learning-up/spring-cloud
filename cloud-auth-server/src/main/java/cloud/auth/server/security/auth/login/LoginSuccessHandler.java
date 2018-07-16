@@ -16,6 +16,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -43,6 +44,9 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
         String redirect = request.getParameter("redirect");
         if(!StringUtils.isBlank(redirect) && !"null".equals(redirect)){
+//            Cookie cookie = new Cookie("", "");
+//            cookie.setDomain("");
+//            response.addCookie(cookie);
             response.sendRedirect(redirect);
         } else {
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
