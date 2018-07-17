@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/cloud-simple-hello/cloud-simple-hello.iml" filepath="$PROJECT_DIR$/cloud-simple-hello/cloud-simple-hello.iml" />
       <module fileurl="file://$PROJECT_DIR$/cloud-simple-server/cloud-simple-server.iml" filepath="$PROJECT_DIR$/cloud-simple-server/cloud-simple-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/cloud-zuul-config/cloud-zuul-config.iml" filepath="$PROJECT_DIR$/cloud-zuul-config/cloud-zuul-config.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kafka/kafka.iml" filepath="$PROJECT_DIR$/kafka/kafka.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/spring-cloud.iml" filepath="$PROJECT_DIR$/.idea/spring-cloud.iml" />
     </modules>
   </component>

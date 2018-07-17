@@ -14,6 +14,7 @@
         <module name="cloud-simple-server" />
         <module name="cloud-simple-server (1)" />
         <module name="cloud-zuul-config" />
+        <module name="kafka" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -25,6 +26,7 @@
       <module name="cloud-simple-server" target="1.8" />
       <module name="cloud-zuul-config" target="1.8" />
       <module name="jenkins" target="1.8" />
+      <module name="kafka" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

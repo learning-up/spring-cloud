@@ -7,6 +7,6 @@
     <file url="file://$PROJECT_DIR$/cloud-simple-hello" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-simple-server" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-zuul-config" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/jenkins" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/kafka" charset="UTF-8" />
   </component>
 </project>
